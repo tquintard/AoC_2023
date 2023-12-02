@@ -4,9 +4,24 @@ from functools import partial
 from get_aoc import get_input
 
 # Regular expressions and their associated color maximums
-COLORS = {'red': (r"(\d+) red", 12),
-          'green': (r"(\d+) green", 13),
-          'blue': (r"(\d+) blue", 14), }
+COLORS = {'red': 12, 'green': 13, 'blue': 14, }
+
+
+def max_cubes_in_game(line: str, color: str) -> int:
+    """
+    Calculates the maximum number of cubes per game and per color.
+
+    Args:
+    - line (str): A line containing game information about set of cubes and colors.
+    - color (str): Specifies the color for which the maximum of cubes is calculated.
+
+    Returns:
+    - int: The maximum number of cubes per game and per color.
+    """
+    # Extract the number of cubes per set for a specific color
+    cubes_per_set = re.findall(r"(\d+) " + color, line)
+    # Extract the maximum count of cubes for a specific color
+    return max(map(int, cubes_per_set))
 
 
 def games(line: str, part: int) -> int:
@@ -15,7 +30,7 @@ def games(line: str, part: int) -> int:
 
     Args:
     - line (str): A line containing information about set cubes and colors.
-    - part (int): Specifies whether to calculate game IDs (part=1) or game power (part=2).
+    - part (int): Specifies whether to calculate game IDs (part 1) or game power (part 2).
 
     Returns:
     - int: The game ID or the game power calculated based on number of cube colors per set.
@@ -26,16 +41,12 @@ def games(line: str, part: int) -> int:
     game_power = 1
 
     # Iterate through each color
-    for value in COLORS.values():
-        # Extract the number of cubes per set for a specific color
-        cubes_per_set = re.findall(value[0], line)
-        # Extract the maximum count of cubes for a specific color
-        max_color_cubes = max(map(int, cubes_per_set))
-
+    for color, max_value in COLORS.items():
+        max_color_cubes = max_cubes_in_game(line, color)
         # Return different value based on the day's puzzle part
         if part == 1:
             # If one of the set have more cubes than the authorized maximum cube then return 0
-            if max_color_cubes > value[1]:
+            if max_color_cubes > max_value:
                 return 0
         else:
             # Calculate game power based on the maximum count of cubes for each color
