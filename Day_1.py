@@ -35,7 +35,7 @@ def recalibrate_line(line: str, part: int) -> int:
 
 def main():
     # Fetch input data
-    lines = get_input(day=2)
+    lines = get_input(day=2, sample=False)
 
     # Iterate through each part of the day's puzzle for recalibration of values
     for part_num in [1, 2]:
