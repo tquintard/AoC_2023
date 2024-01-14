@@ -1,8 +1,8 @@
 from typing import List
-from .sub_modules.gondola import get_partnumber, get_symbols, get_gears_ratio
+from .gondola import get_partnumber, get_symbols, get_gears_ratio
 
 
-def main(inputs: List[str]) -> List[str]:
+def main(inputs: List[str]) -> List[int]:
 
     # Initialise the list and dictionnaries
     sol = [0, 0]
