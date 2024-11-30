@@ -1,9 +1,9 @@
 from typing import List
 from functools import partial
-from .sub_modules.cubes_game import games
+from .cubes_game import games
 
 
-def main(inputs: List[str]) -> List[str]:
+def main(inputs: List[str]) -> List[int]:
     # Iterate through each part of the day's puzzle
     sol = []
     for part_num in [1, 2]:
